@@ -1,0 +1,1 @@
+(BinTree 1 (BinTree 2 null null) (BinTree 3 null null))

@@ -1,0 +1,5 @@
+(.
+   (Pair (Pair 1 2) (Pair 3 4))
+   (first)
+)
+   

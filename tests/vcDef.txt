@@ -1,0 +1,42 @@
+class C1
+{
+	x1
+	x2
+}
+
+class C2 : C1
+{
+	y1
+	y2
+}
+
+class C3 : C2
+{
+	z1
+	z2
+}
+
+class C4 : C2
+{
+	w1
+	w2
+}
+
+class Pair
+{
+	first
+	second
+}
+
+class List
+{
+	data
+	tailList
+}
+
+class BinTree
+{
+	data
+	leftSubTree
+	rightSubTree
+}
