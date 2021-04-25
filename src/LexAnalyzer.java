@@ -346,10 +346,11 @@ class token{
 			//update identity to greater than or equal
 			this.iden = "ge";
 			//read next char
-			br.mark(16);
 			this.characterNum = br.read();
 		}
-		br.reset();
+		else{
+			br.reset();
+		}
 		return;
 	}
 	//less than (exact same as greater then)
@@ -363,7 +364,9 @@ class token{
 			this.iden = "le";
 			this.characterNum = br.read();
 		}
-		br.reset();
+		else{
+			br.reset();
+		}
 		return;
 	}
 	//float
