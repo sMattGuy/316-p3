@@ -461,12 +461,12 @@ public class Parser{
 				break;
 			}
 			if(token_split[0].equals("class")){
-				System.out.println("class found");
+				//System.out.println("class found");
 				//begin next step of parse
 				token = LexAnalyzer.getToken(br);
 				token_split = token.split(" ");
 				if(token_split[1].equals("id")){
-					System.out.println("Class Name Found");
+					//System.out.println("Class Name Found");
 					parseStart.classdef = new classDef();
 					parseStart.classdef.classname = new className();
 					parseStart.classdef.classname.id = token_split[0];
@@ -476,11 +476,11 @@ public class Parser{
 					token_split = token.split(" ");
 					//super class
 					if(token_split[0].equals(":")){
-						System.out.println("Super Class Found");
+						//System.out.println("Super Class Found");
 						token = LexAnalyzer.getToken(br);
 						token_split = token.split(" ");
 						if(token_split[1].equals("id")){
-							System.out.println("Super Class Name Found");
+							//System.out.println("Super Class Name Found");
 							//continue program
 							//modification to original, going to add super class fields to the current
 							parseStart.classdef.superClassName = new className();
@@ -511,7 +511,7 @@ public class Parser{
 					}
 					//open bracket
 					if(token_split[0].equals("{")){
-						System.out.println("Open Bracket Found");
+						//System.out.println("Open Bracket Found");
 						token = LexAnalyzer.getToken(br);
 						token_split = token.split(" ");
 						parseStart.classdef.classbody = new classBody();
@@ -526,7 +526,7 @@ public class Parser{
 						}
 						
 						while(token_split[1].equals("id")){
-							System.out.println("Field Variable Found");
+							//System.out.println("Field Variable Found");
 							if(parseStart.classInfo.fields.contains(token_split[0])){
 								continue;
 							}
@@ -546,17 +546,18 @@ public class Parser{
 						fields = null;
 						
 						//temp to print
+						/**
 						multiFieldVarList printFields = parseStart.classdef.classbody.multifieldvarlist;
 						while(printFields.multifieldvarlist != null){
 							System.out.println(printFields.fieldvar.id);
 							printFields = printFields.multifieldvarlist;
 						}
-						
+						**/
 						//begin function definitions
 						parseStart.classdef.classbody.multifundeflist = new multiFunDefList();
 						multiFunDefList funcdef = parseStart.classdef.classbody.multifundeflist;
 						while(token_split[0].equals("(")){
-							System.out.println("Open Paren. Found");
+							//System.out.println("Open Paren. Found");
 							//individual function parser
 							if(token_split[0].equals("(")){
 								int parenCount = 1;
@@ -569,7 +570,7 @@ public class Parser{
 									token_split = token.split(" ");
 									//fun name gotten
 									if(token_split[1].equals("id")){
-										System.out.println("Function Name Found " + token);
+										//System.out.println("Function Name Found " + token);
 										//LL for params
 										LinkedList<String> params = new LinkedList<String>();
 										funcdef.fundef = new funDef();
@@ -584,7 +585,7 @@ public class Parser{
 										multiParameterList paramsList = funcdef.fundef.head.multiparamlist;
 										while(!token_split[0].equals(")")){
 											if(token_split[1].equals("id")){
-												System.out.println("Function Parameter Found " + token);
+												//System.out.println("Function Parameter Found " + token);
 												//add param to tree and LL
 												paramsList.param = new parameter();
 												paramsList.param.id = token_split[0];
@@ -621,7 +622,7 @@ public class Parser{
 										token = LexAnalyzer.getToken(br);
 										token_split = token.split(" ");
 										if(token_split[0].equals(")")){
-											System.out.println("Function Completed");
+											//System.out.println("Function Completed");
 											//function is complete check if another function is present
 											token = LexAnalyzer.getToken(br);
 											token_split = token.split(" ");
@@ -702,13 +703,17 @@ public class Parser{
 		}
 		parseStart = null;
 		//finale
+		//System.setOut(o);
+		//System.out.println("Class names and their field variables, function names, parameters are displayed below.\n");
+		
 		System.setOut(o);
-		System.out.println("Class names and their field variables, function names, parameters are displayed below.\n");
-		while(completeParse.multiclassdef != null){
-			System.out.println(completeParse.classInfo);
-			completeParse = completeParse.multiclassdef;
+		multipleClassDef printOut = completeParse;
+		while(printOut.multiclassdef != null){
+			System.out.println(printOut.classInfo);
+			printOut = printOut.multiclassdef;
 			System.out.println();
 		}
+
 		return completeParse;
 	}
 }
